@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="lib/demoPlayer.js"></script>
+  <script src="lib/nav.js"></script>
+  <link rel="icon" href="img/favicon.ico">
+
+  <script>
+
+    function hideAllDynamic() {
+      $( ".playlist-wrapper" ).hide();
+      $( ".sub-players" ).hide();
+    }
+
+    function loadPoc1() {
+
+      destroyAllPlayers();
+      hideAllDynamic();
+
+      createPlayer( 'p0', 'ad-playlist', 'main',  null);
+      $( ".playlist-wrapper" ).show();
+    }
+
+    function loadPoc2() {
+
+      destroyAllPlayers();
+      hideAllDynamic();
+
+      createPlayer( 'p0', 'drm', 'main',   'drm1');
+      // createPlayer( 'p1', 'drm', 'small1', 'drm1');
+      // createPlayer( 'p2', 'drm', 'small2', 'drm1');
+      // createPlayer( 'p3', 'drm', 'small3', 'drm1');
+
+      $( ".sub-players" ).show();
+    }
+    function loadPoc3() {
+
+      destroyAllPlayers();
+      hideAllDynamic();
+
+      createPlayer( 'p0', 'bitrate-selector', 'main', null);
+    }
+
+    function loadPoc4() {
+      destroyAllPlayers();
+      hideAllDynamic();
+      createPlayer( 'p0', 'iris', 'main', null);
+    }
+
+    function loadPoc5() {
+      destroyAllPlayers();
+      hideAllDynamic();
+      createPlayer( 'player', 'scrubber', 'main', null);
+    }
+
+
+    function loadHome() {
+      createPlayer('fs', 'big-bg', 'bg-video', null);
+      loadTopNav($('ul.navbar-nav'));
+      $('.title').remove();
+      $('.bg-gray').addClass('home');
+      var html = '<div class="home-page-content container"></div>';
+      $('#main').append(html);
+      loadHomeNav($('.home-page-content'))
+    }
+    // Load the page configuration file and the startup dynamic pages
+    (function() {
+      console.log('getting json')
+      $.getJSON("config.json", function (data, status, jqxhr) {
+        _cfg = data
+        //console.log(_cfg)
+        loadHome()
+      })
+          .fail(function() {
+            console.log( "error loading JSON configuration File." );
+          })
+    })();
+
+  </script>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/{{reponame}}.css" />
+  <link rel="stylesheet" href="https://rawgit.com/brightcove/videojs-thumbnails/master/videojs.thumbnails.css" />
+</head>
+
+<body>
+<nav class="navbar navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <div class="brand-medium hidden-small">
+        <a class="brand" href="#"></a>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse" id="nav1">
+      <ul class="nav navbar-nav" >
+      </ul>
+    </div>
+  </div>
+</nav>
+<div id="bg-video"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title">Videos</h1>
+    </div>
+  </div>
+</div>
+<div class="bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 featured-player" id="main">
+      </div>
+    </div>
+    <div class="row sub-players">
+      <div class="col-sm-4" id="small1"> </div>
+      <div class="col-sm-4" id="small2"> </div>
+      <div class="col-sm-4" id='small3'> </div>
+    </div>
+
+    <div class="playlist-wrapper"> <ol class="vjs-playlist"></ol></div>
+  </div>
+</div>
+</body>
+</html>
