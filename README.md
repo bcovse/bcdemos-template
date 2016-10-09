@@ -23,7 +23,6 @@ This template provides the following structure:
 - img
 - js
   |- bootstrap.min.js
-  |- <sitename>.js
 - config.json
 - index.html
 ```
