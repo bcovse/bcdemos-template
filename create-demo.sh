@@ -87,6 +87,10 @@ cp -R . $LOCALDIR
 rm -rf $LOCALDIR/create-demo.sh
 cd $LOCALDIR
 
+echo "Customizing local index file"
+#NOTE - this is the BSD version of sed for macOS. The Linux version does not require the empty quotes after -i.
+sed -i "" "s/{{reponame}}/${REPONAME}/g" $LOCALDIR/index.html
+
 echo "Initializing local git repo and adding core lib submodule..."
 git init
 git submodule add https://github.com/cfuller/bcdemos-lib.git lib/
@@ -103,5 +107,7 @@ git push origin master
 
 echo "Cleaning up..."
 
-echo "Done"
+echo "Done!"
+echo "Your demo site can be found at $LOCALDIR"
+echo "Your new repo can be found at https://github.com/cfuller/$REPONAME"
 exit 0
