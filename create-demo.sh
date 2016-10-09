@@ -85,6 +85,7 @@ echo "Copying files to $LOCALDIR..."
 mkdir $LOCALDIR
 cp -R . $LOCALDIR
 rm -rf $LOCALDIR/create-demo.sh
+rm -rf $LOCALDIR/.git
 
 echo "Customizing local index file"
 #NOTE - this is the BSD version of sed for macOS. The Linux version does not require the empty quotes after -i.
