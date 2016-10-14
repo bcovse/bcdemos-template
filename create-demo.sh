@@ -92,11 +92,11 @@ echo "Customizing local index file"
 sed -i "" "s/{{reponame}}/${REPONAME}/g" $LOCALDIR/index.html
 
 echo "Initializing local git repo and adding core lib submodule..."
-cd $LOCALDIR; git init; git submodule add https://github.com/cfuller/bcdemos-lib.git lib/; rm -rf bcdemos-lib
+cd $LOCALDIR; git init; git submodule add https://github.com/bcovse/bcdemos-lib.git lib/; rm -rf bcdemos-lib
 
 echo "Creating remote repo..."
-curl -u $UNAME  --data "{\"name\":\"bcdemos-$REPONAME\"}" https://api.github.com/user/repos
-cd $LOCALDIR; git remote add origin https://github.com/cfuller/bcdemos-$REPONAME.git
+curl -u $UNAME  --data "{\"name\":\"bcdemos-$REPONAME\"}" https://api.github.com/orgs/bcovse/repos
+cd $LOCALDIR; git remote add origin https://github.com/bcovse/bcdemos-$REPONAME.git
 
 echo "Synching repos..."
 cd $LOCALDIR; git add .; git commit -m "initial commit"; git push origin master
@@ -105,5 +105,5 @@ echo "Cleaning up..."
 
 echo "Done!"
 echo "Your demo site can be found at $LOCALDIR"
-echo "Your new repo can be found at https://github.com/cfuller/$REPONAME"
+echo "Your new repo can be found at https://github.com/bcovse/$REPONAME"
 exit 0
